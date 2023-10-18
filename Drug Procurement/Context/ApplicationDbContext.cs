@@ -14,6 +14,22 @@ namespace Drug_Procurement.Context
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Users> Users { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Order>()
+                .HasOne(x => x.User)
+                .WithMany()
+                .HasForeignKey(o => o.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(x => x.Inventory)
+                .WithMany()
+                .HasForeignKey(o => o.InventoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            base.OnModelCreating(modelBuilder);
+        }
 
     }
 }

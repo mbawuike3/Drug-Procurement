@@ -29,12 +29,7 @@ namespace Drug_Procurement.Validations
                 .NotNull()
                 .MaximumLength(50)
                 .Must(p => StringHelper.IsValidEmail(p));
-                
-
-            
-
-                
-             
+           
         }
     }
 }

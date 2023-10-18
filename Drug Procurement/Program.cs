@@ -16,7 +16,7 @@ builder.Services.AddValidatorsFromAssembly(typeof(OrderValidator).Assembly);
 builder.Services.AddValidatorsFromAssembly(typeof(UserValidator).Assembly);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ProcurementConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AccountingConnection"));
 });
 var app = builder.Build();
 

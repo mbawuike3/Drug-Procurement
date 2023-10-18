@@ -11,7 +11,7 @@ namespace Drug_Procurement.Models
         public int UserId { get; set; }
         public Users User { get; set; }
 
-        [ForeignKey("Inventory")]
+        [ForeignKey(nameof(Inventory))]
         public int InventoryId { get; set; }
         public Inventory Inventory { get; set; }
         public string Email { get; set; } = string.Empty;

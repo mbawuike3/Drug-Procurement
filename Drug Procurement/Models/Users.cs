@@ -9,7 +9,7 @@ namespace Drug_Procurement.Models
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string UserName { get; set; } = string.Empty;
-        [ForeignKey("Roles")]
+        [ForeignKey(nameof(Roles))]
         public int RoleId { get; set; }
         public Roles Roles { get; set; }
 
