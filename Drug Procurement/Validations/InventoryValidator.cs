@@ -20,10 +20,7 @@ namespace Drug_Procurement.Validations
                 .MaximumLength(100)
                 .Must(p => StringHelper.IsAlphaNumeric(p));
 
-            RuleFor(x => x.Price)
-                .NotEmpty()
-                .NotNull()
-                .Must(p => StringHelper.IsValidatePrice(p));
+            
         }
     }
 }

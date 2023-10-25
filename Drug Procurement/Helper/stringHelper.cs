@@ -26,10 +26,10 @@ namespace Drug_Procurement.Helper
             string pattern = "^[a-zA-Z0-9@#$%^&+=]*$";
             return Regex.IsMatch(input!, pattern);
         }
-        public static bool IsValidatePrice(string priceString)
-        {
-            string pattern = @"^\d+(\.\d{1,2})?$";
-            return Regex.IsMatch(priceString, pattern);
-        }
+        //public static bool IsValidatePrice(string priceString)
+        //{
+        //    string pattern = @"^\d+(\.\d{1,2})?$";
+        //    return Regex.IsMatch(priceString, pattern);
+        //}
     }
 }
