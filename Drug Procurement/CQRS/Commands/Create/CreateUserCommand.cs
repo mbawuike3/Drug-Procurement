@@ -23,7 +23,7 @@ namespace Drug_Procurement.CQRS.Commands.Create
 
         public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var roleId = (int)UserTypeEnum.HealthCareProvider;
+            var roleId = (int)UserTypeEnum.Supplier;
             var user = new Users
             {
                 FirstName = request.FirstName,

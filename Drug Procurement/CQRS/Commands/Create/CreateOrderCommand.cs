@@ -26,6 +26,7 @@ namespace Drug_Procurement.CQRS.Commands.Create
                 Description = request.Description,
                 Quantity = request.Quantity,
                 Price = request.Price,
+                Email = request.Email,  
                 DateCreated = DateTime.Now,
                 Status = OrderStatusEnum.Created.ToString(),
             };

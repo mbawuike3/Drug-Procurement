@@ -1,13 +1,14 @@
-﻿using Drug_Procurement.Helper;
+﻿using Drug_Procurement.CQRS.Commands.Update;
+using Drug_Procurement.DTOs;
+using Drug_Procurement.Helper;
 using Drug_Procurement.Models;
 using FluentValidation;
-
 namespace Drug_Procurement.Validations
 {
-    public class UserValidator : AbstractValidator<Users>
+    public class UserUpdateValidator : AbstractValidator<UpdateUserCommand>
     {
-        public UserValidator() 
-        { 
+        public UserUpdateValidator() 
+        {
             RuleFor(x => x.FirstName)
                 .NotEmpty()
                 .NotNull()
@@ -24,20 +25,13 @@ namespace Drug_Procurement.Validations
                 .NotEmpty()
                 .NotNull()
                 .MaximumLength(50)
-                .Must(p => StringHelper.IsValidEmail(p)); 
-
-            RuleFor(x => x.Password)    
-                .NotEmpty()
-                .NotNull()
-                .MaximumLength(30)
-                .Must(p => StringHelper.IsAlphaNumeric(p));
+                .Must(p => StringHelper.IsValidEmail(p));
 
             RuleFor(x => x.UserName)
                 .NotEmpty()
                 .NotNull()
                 .MaximumLength(30)
                 .Must(p => StringHelper.IsAlphaNumeric(p));
-
         }
     }
 }

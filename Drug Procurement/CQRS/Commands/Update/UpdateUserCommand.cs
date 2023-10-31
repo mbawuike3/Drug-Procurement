@@ -28,6 +28,7 @@ namespace Drug_Procurement.CQRS.Commands.Update
             user.UserName = request.UserName;
             user.LastName = request.LastName;
             user.Email = request.Email;
+            user.DateModified = DateTime.Now;
 
             await _context.SaveChangesAsync();
             return user.Id;
