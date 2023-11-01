@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Drug_Procurement</RootNamespace>
+    <UserSecretsId>896f8b9d-8b8a-4869-ba54-255314147247</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

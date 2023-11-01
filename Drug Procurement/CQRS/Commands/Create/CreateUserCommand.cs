@@ -9,6 +9,7 @@ namespace Drug_Procurement.CQRS.Commands.Create
 {
     public class CreateUserCommand : UserCreationDto, IRequest<int>
     {
+        public int RoleId { get; set; } = 0;
     }
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
     {
@@ -23,7 +24,7 @@ namespace Drug_Procurement.CQRS.Commands.Create
 
         public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var roleId = (int)UserTypeEnum.Supplier;
+
             var user = new Users
             {
                 FirstName = request.FirstName,
@@ -31,7 +32,7 @@ namespace Drug_Procurement.CQRS.Commands.Create
                 Email = request.Email,
                 UserName = request.UserName,
                 Password = _passwordService.Encoder(request.Password),
-                RoleId = roleId,
+                RoleId = request.RoleId == 0 ? (int)UserTypeEnum.HealthCareProvider : request.RoleId,
                 DateCreated = DateTime.Now
             };
             await _context.Users.AddAsync(user);
