@@ -1,6 +1,8 @@
 using Drug_Procurement.Behaviours;
 using Drug_Procurement.Context;
 using Drug_Procurement.Extension;
+using Drug_Procurement.Repositories.Concrete;
+using Drug_Procurement.Repositories.Interfaces;
 using Drug_Procurement.Security.Hash;
 using Drug_Procurement.SeederDb;
 using Drug_Procurement.Validations;
@@ -17,7 +19,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//builder.Services.AddValidatorsFromAssembly(typeof(RoleValidator).Assembly);
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 //builder.Services.AddValidatorsFromAssembly(typeof(OrderValidator).Assembly);
 builder.Services.AddValidatorsFromAssembly(typeof(UserCreationValidator).Assembly);
 //builder.Services.AddValidatorsFromAssembly(typeof(UserUpdateValidator).Assembly);

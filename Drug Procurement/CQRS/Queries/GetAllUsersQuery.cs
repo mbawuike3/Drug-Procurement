@@ -1,5 +1,6 @@
 ﻿using Drug_Procurement.Context;
 using Drug_Procurement.Models;
+using Drug_Procurement.Repositories.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,16 +11,16 @@ namespace Drug_Procurement.CQRS.Queries
     }
     public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, IEnumerable<Users>>
     {
-        private readonly ApplicationDbContext _context;
+        IUserRepository _repository;
 
-        public GetAllUsersQueryHandler(ApplicationDbContext context)
+        public GetAllUsersQueryHandler(IUserRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public async Task<IEnumerable<Users>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            var users = await _context.Users.ToListAsync();
+            var users = await _repository.GetUsers();
             return users;
             
         }
