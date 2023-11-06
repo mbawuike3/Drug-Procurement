@@ -18,7 +18,7 @@ namespace Drug_Procurement.Controllers
             _mediator = mediator;
         }
         [HttpPost]
-        public async Task<IActionResult> CreateUser (CreateUserCommand command)
+        public async Task<IActionResult> CreateUser(CreateUserCommand command)
         {
             await _mediator.Send(command);
             return Ok("User created Successfully");
@@ -31,12 +31,27 @@ namespace Drug_Procurement.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(UpdateUserCommand command, int id)
         {
-            if(id != command.Id)
+            if (id != command.Id)
             {
                 return BadRequest();
             }
             await _mediator.Send(command);
             return Ok("User Credentials Updated");
+        }
+        [HttpPost("User-Login")]
+        public async Task<IActionResult> LoginUser(LoginUserCommand command)
+        {
+            var token = await _mediator.Send(command);
+            if (token == null)
+            {
+                return BadRequest(token);
+            }
+            return Ok(token);
+        }
+        [HttpPost("Reset-Password")]
+        public async Task<IActionResult> UserPasswordReset(ResetUserPasswordCommand command)
+        {
+            return Ok(await _mediator.Send(command));
         }
     }
 }

@@ -2,6 +2,7 @@
 using Drug_Procurement.DTOs;
 using Drug_Procurement.Enums;
 using Drug_Procurement.Models;
+using Drug_Procurement.Repositories.Interfaces;
 using Drug_Procurement.Security.Hash;
 using MediatR;
 
@@ -13,12 +14,12 @@ namespace Drug_Procurement.CQRS.Commands.Create
     }
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUserRepository _repository;
         private readonly IPasswordService _passwordService;
 
-        public CreateUserCommandHandler(ApplicationDbContext context, IPasswordService passwordService)
+        public CreateUserCommandHandler(IUserRepository repository, IPasswordService passwordService)
         {
-            _context = context;
+            _repository = repository;
             _passwordService = passwordService;
         }
 
@@ -41,8 +42,7 @@ namespace Drug_Procurement.CQRS.Commands.Create
                     DateCreated = DateTime.Now,
                     Salt = salt
                 };
-                await _context.Users.AddAsync(user);
-                await _context.SaveChangesAsync();
+                await _repository.CreateUser(user);
                 return user.Id;
             }
             catch (Exception ex)
