@@ -38,10 +38,10 @@ namespace Drug_Procurement.CQRS.Commands.Create
                 UserName = request.UserName,
                 Salt = salt,
                 Password = _passwordService.Encoder(request.Password),
-                RoleId = roleId,
+                RoleId = request.RoleId,
                 DateCreated = DateTime.Now
             };
-            user = await _repository.CreateUsers(user);  
+            user = await _repository.CreateUser(user);  
             return user.Id;
         }
     }
