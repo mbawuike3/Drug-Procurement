@@ -19,6 +19,8 @@ namespace Drug_Procurement.Models
         [ForeignKey(nameof(Roles))]
         public int RoleId { get; set; }
         public Roles Roles { get; set; }
+        
+        public string? Salt { get; set; }
 
 
     }

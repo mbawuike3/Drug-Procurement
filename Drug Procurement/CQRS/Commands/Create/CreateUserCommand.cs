@@ -23,19 +23,23 @@ namespace Drug_Procurement.CQRS.Commands.Create
 
         public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var roleId = (int)UserTypeEnum.Supplier;
+            //Created salt, trim for white spaces and add password to the salt.
+            var salt = Guid.NewGuid().ToString();
+            request.Password = request.Password.Trim();
+            request.Password += salt;
+
             var user = new Users
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 Email = request.Email,
                 UserName = request.UserName,
+                Salt = salt,
                 Password = _passwordService.Encoder(request.Password),
                 RoleId = roleId,
                 DateCreated = DateTime.Now
             };
-            await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
+            user = await _repository.CreateUsers(user);  
             return user.Id;
         }
     }
