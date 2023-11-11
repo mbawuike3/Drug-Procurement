@@ -5,7 +5,7 @@ namespace Drug_Procurement.Repositories.Interfaces
 {
     public interface IUserRepository
     {
-         Task<IEnumerable<Users>> GetUsers();
-        Task<Users>CreateUsers(Users users);
+        Task<IEnumerable<Users>> GetAllUsers();
+        Task<Users>CreateUser(Users user);
     }
 }

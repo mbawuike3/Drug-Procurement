@@ -11,7 +11,7 @@ namespace Drug_Procurement.CQRS.Queries
     }
     public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, IEnumerable<Users>>
     {
-        IUserRepository _repository;
+        private readonly IUserRepository _repository;
 
         public GetAllUsersQueryHandler(IUserRepository repository)
         {
@@ -20,7 +20,7 @@ namespace Drug_Procurement.CQRS.Queries
 
         public async Task<IEnumerable<Users>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            var users = await _repository.GetUsers();
+            var users = await _repository.GetAllUsers();
             return users;
             
         }

@@ -14,19 +14,22 @@ namespace Drug_Procurement.CQRS.Commands.Create
     }
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
     {
-        
+        private readonly IUserRepository _repository;
         private readonly IPasswordService _passwordService;
 
-        IUserRepository _repository;
-
-        public CreateUserCommandHandler(IPasswordService passwordService, IUserRepository repository)
+        public CreateUserCommandHandler(IUserRepository repository, IPasswordService passwordService)
         {
+            _repository = repository;
             _passwordService = passwordService;
             _repository = repository;
         }
 
         public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
+            //Created salt, trim for white spaces and add password to the salt.
+            var salt = Guid.NewGuid().ToString();
+            request.Password = request.Password.Trim();
+            request.Password += salt;
 
             var user = new Users
             {
@@ -34,11 +37,12 @@ namespace Drug_Procurement.CQRS.Commands.Create
                 LastName = request.LastName,
                 Email = request.Email,
                 UserName = request.UserName,
+                Salt = salt,
                 Password = _passwordService.Encoder(request.Password),
-                RoleId = request.RoleId == 0 ? (int)UserTypeEnum.HealthCareProvider : request.RoleId,
+                RoleId = request.RoleId,
                 DateCreated = DateTime.Now
             };
-            user = await _repository.CreateUsers(user);  
+            user = await _repository.CreateUser(user);  
             return user.Id;
         }
     }

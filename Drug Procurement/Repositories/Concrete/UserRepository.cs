@@ -8,14 +8,19 @@ namespace Drug_Procurement.Repositories.Concrete
 {
     public class UserRepository : IUserRepository
     {
-        ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public UserRepository(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task<Users> CreateUsers(Users user)
+        public async Task<IEnumerable<Users>> GetAllUsers()
+        {
+            return await _context.Users.ToListAsync();
+        }
+
+        public async Task<Users> CreateUser(Users user)
         {
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();

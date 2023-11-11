@@ -12,9 +12,8 @@ namespace Drug_Procurement.SeederDb
             using (var scope = serviceProvider.CreateScope())
             {
                 var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                dbContext.Database.EnsureCreated(); 
+                dbContext.Database.EnsureCreated();
                 await dbContext.SaveChangesAsync();
-                //await dbContext.Database.MigrateAsync();
                 var roles =await dbContext.Roles.ToListAsync();
                 if(!roles.Any()) 
                 {
