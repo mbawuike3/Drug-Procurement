@@ -4,50 +4,50 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Drug_Procurement.Security.Hash
+namespace Drug_Procurement.Security.Hash;
+
+public interface IJwtAuth
 {
-    public interface IJwtAuth
+    string GenerateToken(Users user);
+}
+
+public class JwtAuth : IJwtAuth
+{
+    private readonly IConfiguration _config;
+
+    public JwtAuth(IConfiguration config)
     {
-        string GenerateToken(Users user);
+        _config = config;
     }
 
-    public class JwtAuth : IJwtAuth
+    public string GenerateToken(Users user)
     {
-        private readonly IConfiguration _config;
-
-        public JwtAuth(IConfiguration config)
+        /*
+    * Username
+    * FirstName
+    * Email
+    * RoleId
+    */
+        IEnumerable<Claim> claims = new[]
         {
-            _config = config;
-        }
-
-        public string GenerateToken(Users user)
-        {
-            /*
-        * Username
-        * FirstName
-        * Email
-        * RoleId
-        */
-            IEnumerable<Claim> claims = new[]
-            {
             new Claim(ClaimTypes.NameIdentifier, user.UserName),
             new Claim("FirstName", user.FirstName),
             new Claim(ClaimTypes.Email, user.Email),
             new Claim("RoleId", user.RoleId.ToString())
         };
-            JwtSecurityToken jwtSecurityToken = GetToken(claims);
-            string token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-            return token;
-        }
-        private JwtSecurityToken GetToken(IEnumerable<Claim> claims)
-        {
-            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Secret"]));
-            return new JwtSecurityToken(
-                issuer: _config["Jwt:ValidIssuer"],
-                audience: _config["Jwt:ValidAudience"],
-                expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(_config["Jwt:TokenValidityInMinutes"])),
-                claims: claims,
-                signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256)
-                );
-        }
+        JwtSecurityToken jwtSecurityToken = GetToken(claims);
+        string token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+        return token;
     }
+    private JwtSecurityToken GetToken(IEnumerable<Claim> claims)
+    {
+        var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Secret"]));
+        return new JwtSecurityToken(
+            issuer: _config["Jwt:ValidIssuer"],
+            audience: _config["Jwt:ValidAudience"],
+            expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(_config["Jwt:TokenValidityInMinutes"])),
+            claims: claims,
+            signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256)
+            );
+    }
+}

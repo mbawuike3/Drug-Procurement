@@ -8,7 +8,7 @@ namespace Drug_Procurement.CQRS.Commands.Create
 {
     public class ResetUserPasswordCommand : ResetUserPasswordDto, IRequest<string>
     {
-
+        
     }
     public class ResetUserPasswordCommandHandler : IRequestHandler<ResetUserPasswordCommand, string>
     {

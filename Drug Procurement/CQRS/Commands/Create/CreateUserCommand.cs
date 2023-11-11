@@ -2,6 +2,7 @@
 using Drug_Procurement.DTOs;
 using Drug_Procurement.Enums;
 using Drug_Procurement.Models;
+using Drug_Procurement.Repositories.Interfaces;
 using Drug_Procurement.Security.Hash;
 using MediatR;
 
@@ -9,15 +10,16 @@ namespace Drug_Procurement.CQRS.Commands.Create
 {
     public class CreateUserCommand : UserCreationDto, IRequest<int>
     {
+        public int RoleId { get; set; } = 0;
     }
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUserRepository _repository;
         private readonly IPasswordService _passwordService;
 
-        public CreateUserCommandHandler(ApplicationDbContext context, IPasswordService passwordService)
+        public CreateUserCommandHandler(IUserRepository repository, IPasswordService passwordService)
         {
-            _context = context;
+            _repository = repository;
             _passwordService = passwordService;
         }
 

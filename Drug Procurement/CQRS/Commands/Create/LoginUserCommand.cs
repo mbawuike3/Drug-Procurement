@@ -25,7 +25,7 @@ namespace Drug_Procurement.CQRS.Commands.Create
 
         public async Task<string> Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
-            var userFromDB = await _context.Users.FirstOrDefaultAsync(x => x.UserName.ToLower() == request.UserName!.ToLower());
+            var userFromDB = await _context.Users.FirstOrDefaultAsync(x => x.UserName.ToLower() == request.UserName!.ToLower()); 
             if (userFromDB == null)
             {
                 return "User not found";
@@ -39,6 +39,6 @@ namespace Drug_Procurement.CQRS.Commands.Create
                 return _jwtAuth.GenerateToken(userFromDB);
             }
             return "Invalid Credentials";
-        }
+        }        
     }
 }
