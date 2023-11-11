@@ -33,9 +33,11 @@ public class JwtAuth : IJwtAuth
             new Claim(ClaimTypes.NameIdentifier, user.UserName),
             new Claim("FirstName", user.FirstName),
             new Claim(ClaimTypes.Email, user.Email),
-            new Claim("RoleId", user.RoleId.ToString())
+            new Claim("RoleId", user.RoleId.ToString()),
+            new Claim("UserId", user.Id.ToString()),
+            new Claim("LastName", user.LastName)
         };
-        JwtSecurityToken jwtSecurityToken = GetToken(claims);
+        var jwtSecurityToken = GetToken(claims);
         string token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
         return token;
     }
