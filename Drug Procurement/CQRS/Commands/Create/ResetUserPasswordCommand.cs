@@ -23,7 +23,7 @@ namespace Drug_Procurement.CQRS.Commands.Create
 
         public async Task<string> Handle(ResetUserPasswordCommand request, CancellationToken cancellationToken)
         {
-            var userFromDb =await _context.Users.FirstOrDefaultAsync(x => x.UserName.ToLower() == request.UserName!.ToLower() && x.Email.ToLower() == request.Email!.ToLower());
+            var userFromDb = await _context.Users.FirstOrDefaultAsync(x => x.UserName.ToLower() == request.UserName!.ToLower() && x.Email.ToLower() == request.Email!.ToLower());
             if (userFromDb == null)
             {
                 return "User Not Found";

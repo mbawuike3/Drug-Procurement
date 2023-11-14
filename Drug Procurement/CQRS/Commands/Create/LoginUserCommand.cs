@@ -34,7 +34,7 @@ namespace Drug_Procurement.CQRS.Commands.Create
             request.Password = request.Password!.Trim();
             request.Password += salt;
             var hashedPassword = _passwordService.Encoder(request.Password);
-            if(hashedPassword.Equals(userFromDB.Password))
+            if (hashedPassword.Equals(userFromDB.Password))
             {
                 return _jwtAuth.GenerateToken(userFromDB);
             }
