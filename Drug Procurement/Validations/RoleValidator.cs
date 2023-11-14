@@ -17,8 +17,7 @@ namespace Drug_Procurement.Validations
             RuleFor(x => x.Description)
                 .NotEmpty()
                 .NotNull()
-                .MaximumLength(1000)
-                .Must(p => StringHelper.IsAlphaNumeric(p));
+                .MaximumLength(1000);
         }
     }
 }
