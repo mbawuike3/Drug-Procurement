@@ -12,5 +12,6 @@ namespace Drug_Procurement.Models
         public DateTime ExpiryDate { get; set; }
         public DateTime ManufactureDate { get; set; }
         public double Price { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

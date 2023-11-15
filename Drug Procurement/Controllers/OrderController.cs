@@ -1,4 +1,5 @@
 ﻿using Drug_Procurement.CQRS.Commands.Create;
+using Drug_Procurement.CQRS.Commands.Delete;
 using Drug_Procurement.CQRS.Commands.Update;
 using Drug_Procurement.CQRS.Queries;
 using MediatR;
@@ -39,6 +40,11 @@ namespace Drug_Procurement.Controllers
         {
             if (id != command.Id) return NotFound();
             return Ok(await _mediator.Send(command));
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOrder(int id)
+        {
+            return Ok(await _mediator.Send(new DeleteOrderCommand { Id = id }));
         }
     }
 }

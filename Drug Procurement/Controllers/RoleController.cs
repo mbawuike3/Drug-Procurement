@@ -1,4 +1,5 @@
 ﻿using Drug_Procurement.CQRS.Commands.Create;
+using Drug_Procurement.CQRS.Commands.Delete;
 using Drug_Procurement.CQRS.Commands.Update;
 using Drug_Procurement.CQRS.Queries;
 using MediatR;
@@ -40,6 +41,11 @@ namespace Drug_Procurement.Controllers
             var role = await _mediator.Send(new GetRolesByIdQuery { Id = id });
             if(role == null) return NotFound();
             return Ok(role);
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteRole(int id)
+        {
+            return Ok(await _mediator.Send(new DeleteRoleCommand { Id = id }));
         }
     }
 }

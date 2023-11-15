@@ -24,6 +24,10 @@ namespace Drug_Procurement.CQRS.Commands.Update
         public async Task<string> Handle(UpdateRoleCommand request, CancellationToken cancellationToken)
         {
             var userFromDb = await _context.Users.FirstOrDefaultAsync(x => x.Id == request.UserId);
+            if(userFromDb == null)
+            {
+                return "User not found";
+            }
             if (userFromDb.RoleId != 1)
             {
                 throw new InvalidOperationException("Only Admin can create an inventory");

@@ -1,4 +1,5 @@
 ﻿using Drug_Procurement.CQRS.Commands.Create;
+using Drug_Procurement.CQRS.Commands.Delete;
 using Drug_Procurement.CQRS.Commands.Update;
 using Drug_Procurement.CQRS.Queries;
 using MediatR;
@@ -45,6 +46,11 @@ namespace Drug_Procurement.Controllers
             if (inventory == null)
                 return NotFound();
             return Ok(inventory);
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteInventory(int id)
+        {
+            return Ok(await _mediator.Send(new DeleteInventoryCommand { Id = id }));
         }
     }
 }

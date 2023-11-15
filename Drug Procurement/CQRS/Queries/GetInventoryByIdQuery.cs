@@ -20,9 +20,9 @@ namespace Drug_Procurement.CQRS.Queries
 
         public async Task<Inventory> Handle(GetInventoryByIdQuery request, CancellationToken cancellationToken)
         {
-            var inventory = await _context.Inventory.FirstOrDefaultAsync(x => x.Id == request.Id);
+            var inventory = await _context.Inventory.Where(x => x.Id == request.Id && x.IsDeleted == false).FirstOrDefaultAsync();
             if (inventory == null)
-                return default;
+                return null!;
             return inventory;
         }
     }

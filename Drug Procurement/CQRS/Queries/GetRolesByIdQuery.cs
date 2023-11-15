@@ -20,10 +20,10 @@ namespace Drug_Procurement.CQRS.Queries
 
         public async Task<Roles> Handle(GetRolesByIdQuery request, CancellationToken cancellationToken)
         {
-            var role = await _context.Roles.FirstOrDefaultAsync(x => x.Id == request.Id);
+            var role = await _context.Roles.Where(x => x.Id == request.Id && x.IsDeleted == false).FirstOrDefaultAsync();
             if (role == null)
             {
-                return null;
+                return null!;
             }
             return role;
         }

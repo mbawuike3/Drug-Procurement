@@ -21,8 +21,6 @@ namespace Drug_Procurement.Models
         public Roles Roles { get; set; }
         [JsonIgnore]
         public string? Salt { get; set; }
-       
-
-
+        public bool IsDeleted { get; set; }
     }
 }

@@ -20,10 +20,11 @@ namespace Drug_Procurement.CQRS.Queries
 
         public async Task<Order> Handle(GetOrderByIdQuery request, CancellationToken cancellationToken)
         {
-            var order = await _context.Order.FirstOrDefaultAsync(x => x.Id == request.Id);
+            //var order = await _context.Order.Where(x => x.Id == request.Id && x.isdeleted == false).firstordefaultasync();
+            var order = await _context.Order.Where(x => x.Id == request.Id && x.IsDeleted == false).FirstOrDefaultAsync();
             if(order == null)
             {
-                return null;
+                return null!;
             }
             return order;
         }

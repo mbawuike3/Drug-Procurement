@@ -5,14 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Drug_Procurement</RootNamespace>
+    <UserSecretsId>cae6fad7-d8cd-43e9-bc74-c0a8ccb0a8df</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="CQRS\Commands\Delete\**" />
-    <Content Remove="CQRS\Commands\Delete\**" />
-    <EmbeddedResource Remove="CQRS\Commands\Delete\**" />
-    <None Remove="CQRS\Commands\Delete\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />

@@ -38,7 +38,7 @@ namespace Drug_Procurement.CQRS.Commands.Create
                 UserName = request.UserName,
                 Salt = salt,
                 Password = _passwordService.Encoder(request.Password),
-                RoleId = request.RoleId,
+                RoleId = request.RoleId == 0 ? (int)RoleEnum.Healthcare_Provider : request.RoleId,
                 DateCreated = DateTime.Now
             };
             user = await _repository.CreateUser(user);  

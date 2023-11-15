@@ -19,7 +19,7 @@ namespace Drug_Procurement.CQRS.Queries
 
         public async Task<IEnumerable<Order>> Handle(GetAllOrderQuery request, CancellationToken cancellationToken)
         {
-            return await _context.Order.ToListAsync();
+            return (await _context.Order.ToListAsync()).Where(x => x.IsDeleted == false).ToList();
         }
     }
 }

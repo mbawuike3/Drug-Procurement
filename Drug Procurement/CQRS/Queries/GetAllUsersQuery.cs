@@ -20,9 +20,9 @@ namespace Drug_Procurement.CQRS.Queries
 
         public async Task<IEnumerable<Users>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            var users = await _repository.GetAllUsers();
+            var users = (await _repository.GetAllUsers()).Where(x => x.IsDeleted == false).ToList();
             return users;
-            
+  
         }
     }
 
