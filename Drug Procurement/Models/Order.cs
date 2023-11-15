@@ -22,5 +22,6 @@ namespace Drug_Procurement.Models
         public DateTime? DeliveryDate { get; set; }
         [StringLength(50)]
         public string Status { get; set; } = string.Empty;
+        public bool IsDeleted { get; set; }
     }
 }

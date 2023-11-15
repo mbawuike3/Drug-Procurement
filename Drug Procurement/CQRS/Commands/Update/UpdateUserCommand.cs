@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Drug_Procurement.CQRS.Commands.Update
 {
-    public class UpdateUserCommand : UserUpdateDto, IRequest<int>
+    public class UpdateUserCommand : UserUpdateDto, IRequest<string>
     {
     }
-    public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, int>
+    public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, string>
     {
         private readonly ApplicationDbContext _context;
 
@@ -17,21 +17,22 @@ namespace Drug_Procurement.CQRS.Commands.Update
             _context = context;
         }
 
-        public async Task<int> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
             var user = await _context.Users.Where(x => x.Id == request.Id).FirstOrDefaultAsync();
             if (user == null)
             {
-                return default;
+                return "User not found";
             }
             user.FirstName = request.FirstName;
             user.UserName = request.UserName;
             user.LastName = request.LastName;
             user.Email = request.Email;
             user.DateModified = DateTime.Now;
+            //user.IsDeleted = true;
 
             await _context.SaveChangesAsync();
-            return user.Id;
+            return "User Details Updated Successfully";
         }
     }
 }
