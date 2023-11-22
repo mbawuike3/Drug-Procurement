@@ -1,4 +1,5 @@
 ﻿using Drug_Procurement.Context;
+using Drug_Procurement.Enums;
 using Drug_Procurement.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +31,7 @@ namespace Drug_Procurement.CQRS.Commands.Create
             {
                 return "User does not exist";
             }
-            if (userFromDb.RoleId != 1)
+            if (userFromDb.RoleId != (int)RoleEnum.Admin)
             {
                 throw new InvalidOperationException("Only Admin can create an inventory");
             }

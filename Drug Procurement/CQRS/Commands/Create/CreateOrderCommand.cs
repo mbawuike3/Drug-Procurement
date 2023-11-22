@@ -42,7 +42,7 @@ namespace Drug_Procurement.CQRS.Commands.Create
             {
                 throw new Exception("User or inventory not found");
             }  
-            if (user.RoleId != 1 && user.RoleId != 2)
+            if ((RoleEnum)user.RoleId != RoleEnum.Admin && user.RoleId != (int)RoleEnum.Supplier)
             {
                 throw new InvalidOperationException("Only Admin can create an inventory");
             }

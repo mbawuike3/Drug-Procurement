@@ -9,11 +9,12 @@ namespace Drug_Procurement.SeederDb
     {
         public static async Task<IServiceCollection> Initialize(this IServiceCollection services, IServiceProvider serviceProvider)
         {
+            /*
             using (var scope = serviceProvider.CreateScope())
             {
                 var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 dbContext.Database.EnsureCreated();
-                await dbContext.SaveChangesAsync();
+                //await dbContext.SaveChangesAsync();
                 var roles =await dbContext.Roles.ToListAsync();
                 if(!roles.Any()) 
                 {
@@ -30,6 +31,7 @@ namespace Drug_Procurement.SeederDb
                     await dbContext.SaveChangesAsync();
                 }
             }
+            */
             return services;
         }
     }

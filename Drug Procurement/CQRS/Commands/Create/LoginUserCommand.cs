@@ -41,7 +41,8 @@ namespace Drug_Procurement.CQRS.Commands.Create
             {
                 response.AccessToken = _jwtAuth.GenerateToken(userFromDB);
             }
-            return "Invalid Credentials";
+            response.Message = "Invalid Credentials";
+            return response;
         }        
     }
 }
