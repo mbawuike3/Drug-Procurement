@@ -1,5 +1,6 @@
 ﻿using Drug_Procurement.Context;
 using Drug_Procurement.DTOs;
+using Drug_Procurement.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,10 @@ namespace Drug_Procurement.CQRS.Commands.Update
             if (user == null)
             {
                 return "User not found";
+            }
+            if((RoleEnum)user.RoleId != RoleEnum.Admin)
+            {
+                throw new InvalidOperationException("Only Admin can update the information of a user");
             }
             user.FirstName = request.FirstName;
             user.UserName = request.UserName;

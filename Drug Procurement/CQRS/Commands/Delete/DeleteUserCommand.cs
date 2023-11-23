@@ -1,4 +1,5 @@
 ﻿using Drug_Procurement.Context;
+using Drug_Procurement.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.InteropServices;
@@ -24,6 +25,10 @@ namespace Drug_Procurement.CQRS.Commands.Delete
             if (userFromDb == null)
             {
                 return "User not found";
+            }
+            if((RoleEnum)userFromDb.RoleId != RoleEnum.Admin)
+            {
+                throw new InvalidOperationException("Only Admin can delete a user");
             }
             userFromDb.IsDeleted = true;
             await _context.SaveChangesAsync();

@@ -26,11 +26,11 @@ namespace Drug_Procurement.CQRS.Commands.Create
             var userFromDb = await _context.Users.FirstOrDefaultAsync(x => x.UserName.ToLower() == request.UserName!.ToLower() && x.Email.ToLower() == request.Email!.ToLower());
             if (userFromDb == null)
             {
-                return "User Not Found";
+                return "Username/Email Not Found";
             }
             if (string.IsNullOrEmpty(request.Password))
             {
-                return "New password is required";
+                return "New password is required"; 
             }
             var salt = userFromDb.Salt;
             request.Password = request.Password.Trim() + salt;
