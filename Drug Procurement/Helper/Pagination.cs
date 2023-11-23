@@ -23,7 +23,7 @@ public class Pagination : IPagination
             count = response.Count();
             totalPages = (int)Math.Ceiling(count / (double)pageSize);
             nextPage = currentPage < totalPages ? yes : no;
-            var sort = pageSize * currentPage - pageSize;
+            var sort = (pageSize * currentPage) - pageSize;
             results = response.Skip(sort).Take(pageSize).ToList();
         }
         return new PagedResult<T>
