@@ -1,5 +1,6 @@
 using Drug_Procurement.Behaviours;
 using Drug_Procurement.Context;
+using Drug_Procurement.Context.Dapper;
 using Drug_Procurement.Extension;
 using Drug_Procurement.Helper;
 using Drug_Procurement.Repositories.Concrete;
@@ -36,6 +37,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.Initialize(builder.Services.BuildServiceProvider()).GetAwaiter().GetResult();
 builder.Services.AddScoped<IPasswordService, PasswordService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ISqlConnectionFactory, SqlConnectionFactory>();
 builder.Services.AddScoped<IPagination, Pagination>();
 builder.Services.AddScoped<IJwtAuth, JwtAuth>();
 builder.Services.AddAuthentication(options =>
