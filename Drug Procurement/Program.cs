@@ -1,5 +1,6 @@
 using Drug_Procurement.Behaviours;
 using Drug_Procurement.Context;
+using Drug_Procurement.Context.Dapper;
 using Drug_Procurement.Extension;
 using Drug_Procurement.Helper;
 using Drug_Procurement.Repositories.Concrete;
@@ -25,6 +26,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();  
+builder.Services.AddScoped<ISqlConnectionFactory, SqlConnectionFactory>();  
 //builder.Services.AddValidatorsFromAssembly(typeof(OrderValidator).Assembly);
 builder.Services.AddValidatorsFromAssembly(typeof(UserCreationValidator).Assembly);
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));

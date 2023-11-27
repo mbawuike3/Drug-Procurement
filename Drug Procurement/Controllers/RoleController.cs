@@ -43,9 +43,9 @@ namespace Drug_Procurement.Controllers
             return Ok(role);
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRole(int id)
+        public async Task<IActionResult> DeleteRole(DeleteRoleCommand query)
         {
-            return Ok(await _mediator.Send(new DeleteRoleCommand { Id = id }));
+            return Ok(await _mediator.Send(query));
         }
     }
 }
