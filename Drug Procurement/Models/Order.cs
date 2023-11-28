@@ -12,11 +12,11 @@ namespace Drug_Procurement.Models
         public double Price { get; set; }
         [ForeignKey(nameof(Users))]
         public int UserId { get; set; }
-        public Users User { get; set; }
+        public Users? User { get; set; }
 
         [ForeignKey(nameof(Inventory))]
         public int InventoryId { get; set; }
-        public Inventory Inventory { get; set; }
+        public Inventory? Inventory { get; set; }
         [DataType(DataType.EmailAddress), StringLength(50)]
         public string Email { get; set; } = string.Empty;
         public DateTime? DeliveryDate { get; set; }

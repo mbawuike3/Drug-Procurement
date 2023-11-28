@@ -8,11 +8,11 @@ using Drug_Procurement.Repositories.Interfaces;
 using Drug_Procurement.Security.Hash;
 using Drug_Procurement.SeederDb;
 using Drug_Procurement.Validations;
+using Microsoft.IdentityModel.Tokens;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
 
@@ -50,7 +50,7 @@ builder.Services.AddAuthentication(options =>
     {
         options.SaveToken = true;
         options.RequireHttpsMetadata = false;
-        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+        options.TokenValidationParameters = new TokenValidationParameters()
         {
             ValidateIssuer = false,
             ValidateAudience = false,

@@ -59,7 +59,7 @@ public  abstract class PagedResultBase
     public int RecordCount { get; set; }
     public int TotalPages { get; set; }
     public bool Succeeded { get; set; }
-    public string Message { get; set; }
-    public string PreviousPage { get; set; }
-    public string NextPage { get; set; }
+    public string? Message { get; set; }
+    public string? PreviousPage { get; set; }
+    public string? NextPage { get; set; }
 }

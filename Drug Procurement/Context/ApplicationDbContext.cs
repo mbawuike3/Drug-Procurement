@@ -9,10 +9,10 @@ namespace Drug_Procurement.Context
         {
            
         }
-        public DbSet<Inventory> Inventory { get; set; }
-        public DbSet<Order> Order { get; set; }
-        public DbSet<Roles> Roles { get; set; }
-        public DbSet<Users> Users { get; set; }
+        public DbSet<Inventory>? Inventory { get; set; }
+        public DbSet<Order>? Order { get; set; }
+        public DbSet<Roles>? Roles { get; set; }
+        public DbSet<Users>? Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

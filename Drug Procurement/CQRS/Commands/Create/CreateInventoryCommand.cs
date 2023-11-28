@@ -9,8 +9,8 @@ namespace Drug_Procurement.CQRS.Commands.Create
     public class CreateInventoryCommand : IRequest<string>
     { 
         public int UserId { get; set; }
-        public string Name { get; set; } 
-        public string ManufacturerName { get; set; }
+        public string? Name { get; set; } 
+        public string? ManufacturerName { get; set; }
         public DateTime ExpiryDate { get; set; }
         public DateTime ManufactureDate { get; set; }
         public double Price { get; set; }

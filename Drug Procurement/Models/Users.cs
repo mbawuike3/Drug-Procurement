@@ -18,7 +18,7 @@ namespace Drug_Procurement.Models
         public string Email { get; set; } = string.Empty;
         [ForeignKey(nameof(Roles))]
         public int RoleId { get; set; }
-        public Roles Roles { get; set; }
+        public Roles? Roles { get; set; }
         [JsonIgnore]
         public string? Salt { get; set; }
         public bool IsDeleted { get; set; }
