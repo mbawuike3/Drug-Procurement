@@ -26,9 +26,9 @@ namespace Drug_Procurement.Controllers
             return Ok("Product Created Successfully");
         }
         [HttpGet]
-        public async Task<IActionResult> GetAllInventory()
+        public async Task<IActionResult> GetAllInventory([FromQuery] GetAllInventoryQuery query)
         {
-            return Ok(await _mediator.Send(new GetAllInventoryQuery()));
+            return Ok(await _mediator.Send(query));
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateInventoryById(UpdateInventoryCommand command, int id)

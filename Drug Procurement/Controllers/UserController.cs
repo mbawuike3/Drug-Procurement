@@ -25,7 +25,7 @@ namespace Drug_Procurement.Controllers
             return Ok("User created Successfully");
         }
         [HttpGet]
-        public async Task<IActionResult> GetUsers([FromQuery]GetAllUsersQuery query)
+        public async Task<IActionResult> GetUsers([FromQuery] GetAllUsersQuery query)
         {
             return Ok(await _mediator.Send(query));
         }

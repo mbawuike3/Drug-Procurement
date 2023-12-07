@@ -31,7 +31,7 @@ namespace Drug_Procurement.CQRS.Commands.Create
             {
                 return "User does not exist";
             }
-            if (userFromDb.RoleId != (int)RoleEnum.Admin)
+            if ((RoleEnum)userFromDb.RoleId != RoleEnum.Admin)
             {
                 throw new InvalidOperationException("Only Admin can create an inventory");
             }

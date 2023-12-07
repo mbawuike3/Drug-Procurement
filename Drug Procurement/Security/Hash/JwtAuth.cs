@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Drug_Procurement.Security.Hash;
@@ -9,6 +10,7 @@ namespace Drug_Procurement.Security.Hash;
 public interface IJwtAuth
 {
     string GenerateToken(Users user);
+    string GenerateRefreshToken();
 }
 
 public class JwtAuth : IJwtAuth
@@ -51,5 +53,14 @@ public class JwtAuth : IJwtAuth
             claims: claims,
             signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256)
             );
+    }
+    public string GenerateRefreshToken()
+    {
+        var randomNumber = new byte[64];
+        using (var rng = RandomNumberGenerator.Create())
+        {
+            rng.GetBytes(randomNumber);
+            return Convert.ToBase64String(randomNumber);
+        };
     }
 }

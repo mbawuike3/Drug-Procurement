@@ -44,8 +44,9 @@ namespace Drug_Procurement.CQRS.Commands.Create
             }  
             if ((RoleEnum)user.RoleId != RoleEnum.Admin && user.RoleId != (int)RoleEnum.Supplier)
             {
-                throw new InvalidOperationException("Only Admin can create an inventory");
+                throw new InvalidOperationException("Only Admin or Supplier can create an order");
             }
+
             var order = new Order
             {
                 Description = request.Description,

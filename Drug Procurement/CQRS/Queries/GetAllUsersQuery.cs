@@ -27,7 +27,7 @@ namespace Drug_Procurement.CQRS.Queries
         public async Task<PagedResult<Users>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
             var users = (await _repository.GetAllUsers()).Where(x => x.IsDeleted == false).ToList();
-            return _pagination.GetPaginatedResult(users,request.PageNumber,request.PageSize);
+            return _pagination.GetPaginatedResult(users, request.PageNumber, request.PageSize);
   
         }
     }

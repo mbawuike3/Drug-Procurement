@@ -1,4 +1,5 @@
 ﻿using Drug_Procurement.Context;
+using Drug_Procurement.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,9 +29,9 @@ namespace Drug_Procurement.CQRS.Commands.Update
             {
                 return "User does not exist";
             }
-            if (userFromDb.RoleId != 1 && userFromDb.RoleId != 2)
+            if (userFromDb.RoleId != (int)RoleEnum.Admin && userFromDb.RoleId != (int)RoleEnum.Supplier)
             {
-                throw new InvalidOperationException("Only Admin can create an inventory");
+                throw new InvalidOperationException("Only Admin or Supplier can Update an inventory");
             }
             var inventory = await _context.Inventory.FirstOrDefaultAsync(x => x.Id == request.Id);
             if (inventory == null)

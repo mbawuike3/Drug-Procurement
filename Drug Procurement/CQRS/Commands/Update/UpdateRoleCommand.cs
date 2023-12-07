@@ -1,4 +1,5 @@
 ﻿using Drug_Procurement.Context;
+using Drug_Procurement.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,9 +29,9 @@ namespace Drug_Procurement.CQRS.Commands.Update
             {
                 return "User not found";
             }
-            if (userFromDb.RoleId != 1)
+            if ((RoleEnum)userFromDb.RoleId != RoleEnum.Admin)
             {
-                throw new InvalidOperationException("Only Admin can create an inventory");
+                throw new InvalidOperationException("Only Admin can Update a role");
             }
             var role = await _context.Roles.FirstOrDefaultAsync(x => x.Id == request.Id);
             if (role == null) return "Role not Found";

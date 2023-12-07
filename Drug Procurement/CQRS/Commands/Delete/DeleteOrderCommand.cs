@@ -1,4 +1,5 @@
 ﻿using Drug_Procurement.Context;
+using Drug_Procurement.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,7 +23,7 @@ namespace Drug_Procurement.CQRS.Commands.Delete
         {
             var user = await _context.Users.Where(x => x.Id == request.UserId).FirstOrDefaultAsync();
             if (user == null) return "User Not Found";
-            if (user.RoleId != 1)
+            if ((RoleEnum)user.RoleId != RoleEnum.Admin)
             {
                 throw new InvalidOperationException("Only Admin can delete an order");
             }

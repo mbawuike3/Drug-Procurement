@@ -24,9 +24,9 @@ namespace Drug_Procurement.Controllers
             return Ok(await _mediator.Send(command));
         }
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] GetAllOrderQuery query)
         {
-            return Ok(await _mediator.Send(new GetAllOrderQuery()));
+            return Ok(await _mediator.Send(query));
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)

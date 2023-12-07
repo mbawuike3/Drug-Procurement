@@ -25,7 +25,7 @@ public class Pagination : IPagination
             count = response.Count();
             totalPages = (int)Math.Ceiling(count / (double)pageSize);
             nextPage = currentPage < totalPages ? yes : no;
-            var sort = pageSize * currentPage - pageSize;
+            var sort = (pageSize * currentPage) - pageSize;
             results = response.Skip(sort).Take(pageSize).ToList();
         }
         return new PagedResult<T>
@@ -48,18 +48,17 @@ public class PagedResult<T> : PagedResultBase where T : class
 
     public PagedResult()
     {
-            Results = new List<T>();    
+        Results = new List<T>();
     }
 }
-
-public  abstract class PagedResultBase
+public abstract class PagedResultBase
 {
     public int CurrentPage { get; set; }
     public int RecordsPerPage { get; set; }
     public int RecordCount { get; set; }
     public int TotalPages { get; set; }
     public bool Succeeded { get; set; }
-    public string Message { get; set; }
-    public string PreviousPage { get; set; }
-    public string NextPage { get; set; }
+    public string? Message { get; set; }
+    public string? PreviousPage { get; set; }
+    public string? NextPage { get; set; }
 }
