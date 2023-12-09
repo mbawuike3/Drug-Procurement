@@ -36,7 +36,7 @@ namespace Drug_Procurement.CQRS.Commands.Update
             {
                 context.Open();
             }
-            string userSql = @"SELECT * FROM Users WHERE Id=@UserId;";
+            string userSql = @"SELECT * FROM Users WHERE Id=@UserId AND IsDeleted=0;";
             var user = await context.QueryFirstAsync<Users>(userSql, new { request.UserId });
             if (user == null)
             {

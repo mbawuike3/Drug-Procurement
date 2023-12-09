@@ -32,10 +32,10 @@ namespace Drug_Procurement.CQRS.Queries
                 context.Open();
             }
             string sql = @"SELECT * FROM Roles WHERE IsDeleted=0 AND Id=@Id;";
-            var role = await context.QueryFirstAsync<Roles>(sql, new { request.Id });
+            var role = await context.QueryFirstOrDefaultAsync<Roles>(sql, new { request.Id });
             if (role == null)
             {
-                return null!;
+                throw new Exception("Role not found");
             }
             return role;
         }

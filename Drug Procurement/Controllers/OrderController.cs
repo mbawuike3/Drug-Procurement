@@ -42,9 +42,9 @@ namespace Drug_Procurement.Controllers
             return Ok(await _mediator.Send(command));
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteOrder(int id)
+        public async Task<IActionResult> DeleteOrder(DeleteOrderCommand query)
         {
-            return Ok(await _mediator.Send(new DeleteOrderCommand { Id = id }));
+            return Ok(await _mediator.Send(query));
         }
     }
 }

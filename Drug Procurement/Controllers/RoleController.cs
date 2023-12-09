@@ -39,7 +39,6 @@ namespace Drug_Procurement.Controllers
         public async Task<IActionResult> GetRoleById(int id)
         {
             var role = await _mediator.Send(new GetRolesByIdQuery { Id = id });
-            if(role == null) return NotFound();
             return Ok(role);
         }
         [HttpDelete("{id}")]

@@ -35,8 +35,8 @@ namespace Drug_Procurement.CQRS.Commands.Delete
             {
                 context.Open();
             }
-            string userSql = @"SELECT * FROM Users WHERE Id=@UserId;";
-            var user = await context.QueryFirstAsync<Users>(userSql, new { request.UserId });
+            string userSql = @"SELECT * FROM Users WHERE Id=@UserId AND IsDeleted=0;";
+            var user = await context.QueryFirstOrDefaultAsync<Users>(userSql, new { request.UserId });
             if (user == null) return "User Not Found";
             if (user.RoleId != (int)RoleEnum.Admin)
             {
@@ -44,7 +44,7 @@ namespace Drug_Procurement.CQRS.Commands.Delete
             }
             //var userFromDb = await _context.Roles.Where(x => x.Id == request.Id && x.IsDeleted == false).FirstOrDefaultAsync();
             string roleSql = @"SELECT * FROM Roles WHERE Id=@Id AND IsDeleted=0;";
-            var roleFromDb = await context.QueryFirstAsync<Roles>(roleSql, new { request.Id });
+            var roleFromDb = await context.QueryFirstOrDefaultAsync<Roles>(roleSql, new { request.Id });
 
             if (roleFromDb == null)
             {

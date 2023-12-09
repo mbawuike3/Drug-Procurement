@@ -38,14 +38,14 @@ namespace Drug_Procurement.CQRS.Commands.Create
                 context.Open();
             }
             string userSql = @"SELECT * FROM Users WHERE Id=@UserId;";
-            var user = await context.QueryFirstAsync<Users>(userSql, new { request.UserId });
+            var user = await context.QueryFirstOrDefaultAsync<Users>(userSql, new { request.UserId });
             if (user == null)
             {
-                return "User not found";
+                return ("User not found");
             }
             if ((RoleEnum)user.RoleId != RoleEnum.Admin)
             {
-                throw new InvalidOperationException("Only Admin can create an inventory");
+                return ("Only Admin can create an inventory");
             }
             string insertRoleSql = @"INSERT INTO Roles (Name, Description, DateCreated, IsDeleted) 
                                     VALUES (@Name, @Description, @DateCreated, @IsDeleted);";
